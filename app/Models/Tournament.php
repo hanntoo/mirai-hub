@@ -34,6 +34,11 @@ class Tournament extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function game(): BelongsTo
+    {
+        return $this->belongsTo(Game::class, 'game_type', 'slug');
+    }
+
     public function participants(): HasMany
     {
         return $this->hasMany(Participant::class);
