@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Game;
 use App\Models\Tournament;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
@@ -37,17 +38,27 @@ class CreateTournament extends Component
     #[Computed]
     public function gameTypes(): array
     {
-        return [
-            'mobile-legends' => 'Mobile Legends',
-            'pubg-mobile' => 'PUBG Mobile',
-            'free-fire' => 'Free Fire',
-            'valorant' => 'Valorant',
-            'dota-2' => 'Dota 2',
-            'league-of-legends' => 'League of Legends',
-            'fifa' => 'FIFA',
-            'pes' => 'eFootball',
-            'other' => 'Lainnya',
-        ];
+        return Game::active()
+            ->ordered()
+            ->get(['slug', 'name', 'abbreviation'])
+            ->mapWithKeys(fn($g) => [$g->slug => [
+                'name' => $g->name,
+                'abbreviation' => $g->abbreviation
+            ]])
+            ->toArray();
+    }
+
+    /**
+     * Search games by name or abbreviation for autocomplete.
+     */
+    public function searchGames(string $search = ''): array
+    {
+        return Game::active()
+            ->when($search, fn($q) => $q->search($search))
+            ->ordered()
+            ->limit(10)
+            ->get(['slug', 'name', 'abbreviation'])
+            ->toArray();
     }
 
     public function mount(): void
@@ -176,19 +187,19 @@ class CreateTournament extends Component
     public function toggleRequired(int $index): void
     {
         if (!isset($this->fields[$index])) return;
-        $this->fields[$index]['required'] = !$this->fields[$index]['required'];
+        $this->fields[$index]['required'] = !($this->fields[$index]['required'] ?? false);
     }
 
     public function toggleImageInput(int $index): void
     {
         if (!isset($this->fields[$index])) return;
-        $this->fields[$index]['showImageInput'] = !$this->fields[$index]['showImageInput'];
+        $this->fields[$index]['showImageInput'] = !($this->fields[$index]['showImageInput'] ?? false);
     }
 
     public function toggleLinkInput(int $index): void
     {
         if (!isset($this->fields[$index])) return;
-        $this->fields[$index]['showLinkInput'] = !$this->fields[$index]['showLinkInput'];
+        $this->fields[$index]['showLinkInput'] = !($this->fields[$index]['showLinkInput'] ?? false);
     }
 
     public function clearImage(int $index): void
@@ -209,7 +220,7 @@ class CreateTournament extends Component
     public function toggleRestrictTypes(int $index): void
     {
         if (!isset($this->fields[$index]['fileSettings'])) return;
-        $this->fields[$index]['fileSettings']['restrictTypes'] = !$this->fields[$index]['fileSettings']['restrictTypes'];
+        $this->fields[$index]['fileSettings']['restrictTypes'] = !($this->fields[$index]['fileSettings']['restrictTypes'] ?? false);
     }
 
     public function toggleFileType(int $index, string $fileType): void

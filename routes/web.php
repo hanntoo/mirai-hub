@@ -16,6 +16,7 @@ use App\Livewire\UserProfile;
 // Public Routes
 Route::get('/', function () {
     $tournaments = \App\Models\Tournament::where('status', 'open')
+        ->with('game')
         ->withCount('participants')
         ->latest()
         ->take(6)

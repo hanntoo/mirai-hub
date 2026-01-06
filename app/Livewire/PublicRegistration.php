@@ -31,6 +31,7 @@ class PublicRegistration extends Component
     {
         $this->tournament = Tournament::where('slug', $slug)
             ->where('status', 'open')
+            ->with('game')
             ->firstOrFail();
 
         // Parse sections from form_schema
