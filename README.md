@@ -1,59 +1,173 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 🎮 MIRAI Hub – Esports Tournament Platform
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**MIRAI Hub** adalah aplikasi web full-stack berbasis **Laravel 12** yang dirancang sebagai portal pendaftaran dan manajemen turnamen esports.  
+Project ini dikembangkan untuk menunjukkan kemampuan dalam membangun **sistem dinamis, scalable, dan maintainable** menggunakan modern Laravel ecosystem.
 
-## About Laravel
+> **Role:** Full-Stack Laravel Developer  
+> **Status:** Development  
+> **Tech Focus:** Laravel • Livewire • Dynamic Form • Auth System  
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🧠 Problem Statement
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Sebagian besar platform turnamen esports:
+- Memiliki form pendaftaran statis
+- Sulit dikustomisasi untuk setiap turnamen
+- Tidak fleksibel terhadap jenis game & kebutuhan organizer
 
-## Learning Laravel
+**MIRAI Hub** menyelesaikan masalah tersebut dengan:
+- **Dynamic form builder** berbasis JSON
+- **Multi-step registration system**
+- **Multi-authentication** (Manual, Google OAuth, Firebase)
+- **Admin dashboard** terintegrasi
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+---
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## ✨ Key Features
 
-## Laravel Sponsors
+### 🧩 Dynamic Tournament Registration Form
+- Admin dapat membuat form pendaftaran **tanpa coding**
+- Setiap turnamen memiliki schema form sendiri
+- Mendukung:
+  - Text, textarea, select, radio, checkbox
+  - File upload (dengan validasi tipe & ukuran)
+  - Section, note, image, link (static block)
+- Data disimpan sebagai **JSON schema**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 🏆 Tournament Management
+- Create, edit, publish, close tournament
+- Slot peserta & status otomatis (open / closed)
+- Export data peserta ke Excel
 
-### Premium Partners
+### 👥 Authentication System
+- Manual login & register
+- Google OAuth (Laravel Socialite)
+- Firebase Authentication (client-side Google Sign-In)
+- Role-based access (Admin / User)
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 🧑‍💼 Admin Dashboard
+- Statistik turnamen & peserta
+- Manajemen peserta
+- Export data pendaftaran
 
-## Contributing
+---
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## 🛠️ Tech Stack
 
-## Code of Conduct
+### Backend
+- **Laravel 12**
+- **PHP 8.5+**
+- **Livewire 3** (full-stack reactive components)
+- Laravel Socialite (OAuth)
+- Maatwebsite Excel (export)
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### Frontend
+- **Tailwind CSS 4**
+- **Alpine.js**
+- Vite
+- Dark gaming UI theme
 
-## Security Vulnerabilities
+### Database
+- PostgreSQL
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+---
 
-## License
+## 🧱 Architecture Overview
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```
+
+User ──< Tournament ──< Participant
+└──< UserGameProfile
+Tournament >── Game
+
+````
+
+- **Tournament** menyimpan `form_schema` (JSON)
+- **Participant** menyimpan `submission_data` (JSON)
+- Validasi dilakukan per-step di Livewire
+
+---
+
+## 🧩 Core Components
+
+### Livewire Components
+- `Admin/CreateTournament`  
+  → Dynamic form builder (≈ 380 LOC)
+- `PublicRegistration`  
+  → Multi-step form + validation (≈ 330 LOC)
+- `UserProfile`  
+  → Game profile & auto-fill form
+
+### Key Technical Highlights
+- JSON-driven UI rendering
+- State management di Livewire
+- Conditional validation per step
+- File upload handling
+- Role-based middleware
+
+---
+
+## 🔐 Security & Access Control
+
+- CSRF protection
+- Auth & admin middleware
+- Role-based routing
+- Secure file upload validation
+- OAuth token verification
+
+---
+
+## 🧪 Development & Testing
+
+```bash
+composer install
+npm install
+php artisan migrate --seed
+composer dev
+````
+
+Testing:
+
+```bash
+php artisan test
+```
+
+---
+
+## 📊 Codebase Summary
+
+| Category            | Count |
+| ------------------- | ----- |
+| Models              | 5     |
+| Livewire Components | 7     |
+| Controllers         | 5     |
+| Migrations          | 12    |
+| Seeders             | 2     |
+
+**Notable Files**
+
+* `CreateTournament.php` → ~380 LOC
+* `PublicRegistration.php` → ~330 LOC
+* Dynamic Blade views → 1000+ LOC
+
+---
+
+## 🚀 What This Project Demonstrates
+
+✅ Advanced Laravel architecture
+✅ Livewire full-stack development
+✅ Dynamic form & JSON-based schema
+✅ Authentication & authorization
+✅ Clean code & separation of concerns
+✅ Real-world use case (esports platform)
+
+---
+
+## 🔮 Planned Improvements
+
+* Email verification
+* Password reset
+* API endpoints
+* Unit & feature tests
+* Caching & performance optimization
