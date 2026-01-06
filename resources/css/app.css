@@ -1,0 +1,54 @@
+/* Google Fonts - Orbitron for Display */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../vendor/livewire/livewire/src/Features/SupportPagination/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../**/*.blade.php';
+@source '../**/*.js';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-display: 'Orbitron', ui-sans-serif, system-ui, sans-serif;
+    
+    /* MIRAI Brand Colors */
+    --color-mirai-cyan: #06b6d4;
+    --color-mirai-blue: #3b82f6;
+    --color-mirai-dark: #050505;
+    --color-mirai-panel: #111111;
+    
+    --color-cyan-400: #22d3ee;
+    --color-cyan-500: #06b6d4;
+    --color-blue-500: #3b82f6;
+    --color-blue-600: #2563eb;
+    --color-zinc-100: #f4f4f5;
+    --color-zinc-300: #d4d4d8;
+    --color-zinc-400: #a1a1aa;
+    --color-zinc-500: #71717a;
+    --color-zinc-600: #52525b;
+    --color-zinc-700: #3f3f46;
+    --color-zinc-800: #27272a;
+    --color-zinc-900: #18181b;
+    --color-zinc-950: #09090b;
+}
+
+/* MIRAI Grid Background Pattern */
+.grid-bg {
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
+
+/* Gradient Text Helper */
+.gradient-text {
+    background: linear-gradient(to right, #06b6d4, #3b82f6);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
