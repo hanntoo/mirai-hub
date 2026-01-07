@@ -4,7 +4,7 @@
 Project ini dikembangkan untuk menunjukkan kemampuan dalam membangun **sistem dinamis, scalable, dan maintainable** menggunakan modern Laravel ecosystem.
 
 > **Role:** Full-Stack Laravel Developer  
-> **Status:** Development  
+> **Status:** Functional Prototype  
 > **Tech Focus:** Laravel • Livewire • Dynamic Form • Auth System  
 
 ---
@@ -153,7 +153,7 @@ php artisan test
 
 ---
 
-## 🚀 What This Project Demonstrates
+## 🚀 Skills & Experience Demonstrated
 
 ✅ Advanced Laravel architecture
 ✅ Livewire full-stack development
