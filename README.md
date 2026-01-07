@@ -156,10 +156,15 @@ php artisan test
 ## 🚀 Skills & Experience Demonstrated
 
 ✅ Advanced Laravel architecture
+
 ✅ Livewire full-stack development
+
 ✅ Dynamic form & JSON-based schema
+
 ✅ Authentication & authorization
+
 ✅ Clean code & separation of concerns
+
 ✅ Real-world use case (esports platform)
 
 ---
